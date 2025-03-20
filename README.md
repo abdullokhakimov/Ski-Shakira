@@ -1,48 +1,36 @@
 # platformer
 
+Prototyp für ein Platformer Game auf Basis von Python Arcade.
 
+## 1. Gruppen Repository einrichten
 
-## Getting started
+Jede Gruppe entwickelt ihr eigenes Spiel. Daher muss **der/die Git-Meister/in** zuerst ein eigenes Repository für Ihre Gruppe einrichten und den Prototypen kopieren.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+1. Jedes Gruppenmitglied meldet sich einmal mit seinem/ihrem TU Account im TU Gitlab an. Dieser Schritt ist nötig, damit der/die Git-Meister/in im nächsten Schritt die Gruppe erstellen kann. https://git.tu-berlin.de/users/sign_in
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+2. Legen Sie eine neue Gruppe in Gitlab an und fügen Sie alle Mitglieder der Gruppe hinzu.
 
-## Add your files
+3. Öffnen Sie die Website zu diesem Repository: https://git.tu-berlin.de/zoppke/platformer
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+4. Erstellen Sie eine Kopie des Repository mit der Schaltfläche `Fork`:
+  - Project Name: Der Name Ihres Spiels
+  - Project URL: wählen Sie bei `namespace` Ihre Gruppe
+  - Visibility level: private (Damit ist der Code nur für die Mitglieder Ihrer Gruppe sichtbar und andere können nicht abschreiben)
+  - Drücken Sie abschließend auf `Fork project`
 
-```
-cd existing_repo
-git remote add origin https://git.tu-berlin.de/zoppke/platformer.git
-git branch -M main
-git push -uf origin main
-```
+## 2. Eine persönliche Arbeitskopie anlegen 
 
-## Integrate with your tools
+**Jedes Projektmitglied** nimmt Änderungen am Projekt vor. Dazu braucht es eine persönliche Arbeitskopie des Repositories auf dem PC, an dem Sie arbeiten.
 
-- [ ] [Set up project integrations](https://git.tu-berlin.de/zoppke/platformer/-/settings/integrations)
+1. Öffnen Sie an Ihrem Arbeitsrechner ein Terminal.
 
-## Collaborate with your team
+2. Clonen Sie das Gruppen-Repository mit dem Befehl `git clone https://git.tu-berlin.de/nameihrergruppe/ihrspiel.git`
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+3. Sie werden nach Ihrem Account und Passwort gefragt. Dann lädt git die Daten herunter.
 
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
+4. Testen Sie, ob alles geklappt hat:
+  - `cd ihrspiel`
+  - `python game.py`
 
 # Editing this README
 
