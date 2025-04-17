@@ -1,0 +1,6 @@
+TO do list. Hier können wir lale Pläne und Aufgaben schreiben, die wir erledigen müssen.
+
+Eine Spielkarte erstellen mit json format. Vielleicht wäre es einfacher zu nutzen beim Mechanikbestimmung und Kollision, aber müss noch genauer untersucht werden.
+-lernen wie man eine json file erstellet. 
+ Es gibt ein paar Beispiele unter :arcade\resources\assets\tiled_maps und eins davon wird in der game.py biespiel  verwendet.
+
