@@ -1,0 +1,175 @@
+'''
+Ein Beispiel für eine vertikales skiing spiel mit collectibles und hindernisse
+Steuerung - rechts und links bewegung und Space taste um zu springen.
+'''
+
+
+import arcade
+import random
+
+# Constants
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+SCREEN_TITLE = "Skiing Platformer"
+
+PLAYER_MOVEMENT_SPEED = 5
+GRAVITY = 0.5
+JUMP_SPEED = 15
+SCROLL_SPEED = 3
+
+# Sprite scaling
+PLAYER_SCALING = 0.5
+TREE_SCALING = 0.4
+FLAG_SCALING = 0.3
+
+
+class SkiingGame(arcade.Window):
+    def __init__(self):
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+
+        # Sprite lists
+        self.player_list = None
+        self.tree_list = None
+        self.flag_list = None
+        self.ground_list = None
+        self.all_sprites = None
+
+        # Player info
+        self.player_sprite = None
+        self.score = 0
+        self.physics_engine = None
+
+        # Scrolling
+        self.view_bottom = 0
+
+        arcade.set_background_color(arcade.color.WHITE)
+
+    def setup(self):
+        # Initialize sprite lists
+        self.player_list = arcade.SpriteList()
+        self.tree_list = arcade.SpriteList()
+        self.flag_list = arcade.SpriteList()
+        self.ground_list = arcade.SpriteList()
+        self.all_sprites = arcade.SpriteList()
+
+        # Set up player
+        self.player_sprite = arcade.Sprite(
+            ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png", PLAYER_SCALING)
+        self.player_sprite.center_x = 100
+        self.player_sprite.center_y = SCREEN_HEIGHT - 50
+        self.player_list.append(self.player_sprite)
+        self.all_sprites.append(self.player_sprite)
+
+        # Set up ground
+        ground = arcade.SpriteSolidColor(SCREEN_WIDTH, 20, arcade.color.WHITE)
+        ground.center_x = SCREEN_WIDTH // 2
+        ground.center_y = 10
+        self.ground_list.append(ground)
+        # Don't add ground to all_sprites to prevent it from scrolling
+
+        # Create obstacles and collectibles
+        for y in range(50, 5000, 200):
+            # Trees (obstacles)
+            for i in range(random.randint(1, 3)):
+                tree = arcade.Sprite(":resources:images/tiles/grass_sprout.png", TREE_SCALING)
+                tree.center_x = random.randrange(50, SCREEN_WIDTH - 50)
+                tree.center_y = y + random.randrange(-50, 50)
+                self.tree_list.append(tree)
+                self.all_sprites.append(tree)
+
+            # Flags (collectibles)
+            flag = arcade.Sprite(":resources:images/items/flagRed1.png", FLAG_SCALING)
+            flag.center_x = random.randrange(50, SCREEN_WIDTH - 50)
+            flag.center_y = y
+            self.flag_list.append(flag)
+            self.all_sprites.append(flag)
+
+        # Set up physics engine with ground as platform
+        self.physics_engine = arcade.PhysicsEnginePlatformer(
+            self.player_sprite,
+            platforms=self.ground_list,
+            gravity_constant=GRAVITY
+        )
+
+    def on_draw(self):
+        self.clear()
+
+        # Draw all sprites
+        self.all_sprites.draw()
+        self.ground_list.draw()
+
+        # Draw score
+        arcade.draw_text(f"Score: {self.score}", 10, SCREEN_HEIGHT - 30, arcade.color.BLACK, 18)
+
+    def on_update(self, delta_time):
+        # Update player physics
+        self.physics_engine.update()
+
+        # Handle collisions
+        # Trees (game over on hit)
+        hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.tree_list)
+        if hit_list:
+            arcade.draw_text("Game Over!", SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2, arcade.color.RED, 36)
+            arcade.pause(2)
+            arcade.close_window()
+
+        # Flags (increase score)
+        flag_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.flag_list)
+        for flag in flag_hit_list:
+            flag.remove_from_sprite_lists()
+            self.score += 10
+
+        # Scrolling
+        self.view_bottom += SCROLL_SPEED
+        for sprite in self.all_sprites:
+            sprite.center_y -= SCROLL_SPEED
+
+        # Remove sprites that go off-screen
+        for sprite in self.all_sprites:
+            if sprite.center_y < -100:
+                sprite.remove_from_sprite_lists()
+
+        # Add new obstacles/collectibles if needed
+        if len(self.tree_list) < 10:
+            y = self.view_bottom + SCREEN_HEIGHT + 100
+            for i in range(random.randint(1, 3)):
+                tree = arcade.Sprite(":resources:images/tiles/treeGreen_large.png", TREE_SCALING)
+                tree.center_x = random.randrange(50, SCREEN_WIDTH - 50)
+                tree.center_y = y + random.randrange(-50, 50)
+                self.tree_list.append(tree)
+                self.all_sprites.append(tree)
+
+            flag = arcade.Sprite(":resources:images/items/flagRed1.png", FLAG_SCALING)
+            flag.center_x = random.randrange(50, SCREEN_WIDTH - 50)
+            flag.center_y = y
+            self.flag_list.append(flag)
+            self.all_sprites.append(flag)
+
+        # Keep player within bounds
+        if self.player_sprite.left < 0:
+            self.player_sprite.left = 0
+        if self.player_sprite.right > SCREEN_WIDTH:
+            self.player_sprite.right = SCREEN_WIDTH
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.LEFT:
+            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.SPACE:
+            if self.physics_engine.can_jump():
+                self.player_sprite.change_y = JUMP_SPEED
+
+    def on_key_release(self, key, modifiers):
+        if key in (arcade.key.LEFT, arcade.key.RIGHT):
+            self.player_sprite.change_x = 0
+
+
+def main():
+    game = SkiingGame()
+    game.setup()
+    arcade.run()
+
+
+if __name__ == "__main__":
+    main()
