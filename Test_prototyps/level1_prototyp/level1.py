@@ -278,6 +278,11 @@ class GameView(arcade.View):
         elif key == arcade.key.RIGHT:
             self.right_pressed = True
 
+        if key == arcade.key.ESCAPE:
+            # pass self, the current view, to preserve this view's state
+            pause = PauseView(self)
+            self.window.show_view(pause)
+
     def on_key_release(self, key, modifiers):
         """Called whenever a key is released."""
         if key == arcade.key.SPACE:
@@ -381,6 +386,45 @@ class GameView(arcade.View):
                 self.camera.view_data,
                 self.camera_bounds
             )
+
+class PauseView(arcade.View):
+    def __init__(self, game_view):
+        super().__init__()
+        self.game_view = game_view
+
+    def on_show_view(self):
+        self.window.background_color = arcade.color.WHITE_SMOKE
+
+    def on_draw(self):
+        self.clear()
+
+        # Draw player, for effect, on pause screen.
+        # The previous View (GameView) was passed in
+        # and saved in self.game_view.
+        player_sprite = self.game_view.player_sprite
+        arcade.draw_sprite(player_sprite)
+
+        # draw an orange filter over him
+        arcade.draw_lrbt_rectangle_filled(left=player_sprite.left,
+                                          right=player_sprite.right,
+                                          bottom=player_sprite.bottom,
+                                          top=player_sprite.top,
+                                          color=arcade.color.ORANGE[:3] + (200,))
+
+        arcade.draw_text("PAUSED", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 50,
+                         arcade.color.BLACK, font_size=50, anchor_x="center")
+
+        # Show tip to return or reset
+        arcade.draw_text("Press Esc. to return",
+                         WINDOW_WIDTH / 2,
+                         WINDOW_HEIGHT / 2,
+                         arcade.color.BLACK,
+                         font_size=20,
+                         anchor_x="center")
+
+    def on_key_press(self, key, _modifiers):
+        if key == arcade.key.ESCAPE:   # resume game
+            self.window.show_view(self.game_view)
 
 
 def main():
