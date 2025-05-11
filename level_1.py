@@ -262,6 +262,7 @@ class GameView(arcade.View):
         if self.game_over:
             if key == arcade.key.R:
                 self.setup()
+                self.score = 0
                 return
 
         if key == arcade.key.SPACE:
