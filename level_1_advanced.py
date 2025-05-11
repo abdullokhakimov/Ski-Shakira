@@ -149,7 +149,7 @@ class GameView(arcade.View):
 
             # Set up the player - use built-in resource instead of file
             self.player_sprite = arcade.Sprite(
-                ":resources:images/animated_characters/female_person/femalePerson_idle.png",
+                os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/Sprites/shakira.png"),
                 scale=PLAYER_SCALING,
             )
 
