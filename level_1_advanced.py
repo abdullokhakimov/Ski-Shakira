@@ -1,7 +1,9 @@
 import arcade
 import os
 import time
+from typing import Optional
 
+# Game constants
 TILE_SCALING = 0.5
 PLAYER_SCALING = 1
 
@@ -16,49 +18,48 @@ CAMERA_PAN_SPEED = 0.5
 SKIING = 0
 JUMPING = 1
 GAME_OVER = 2
+LEVEL_COMPLETE = 3  # Added new state for level completion
 
-
-# --- Physics forces. Higher number, faster accelerating.
-
-# Gravity
+# Physics constants
 GRAVITY = 2500
-
-# Damping - Amount of speed lost per second
 DEFAULT_DAMPING = 0.05
 PLAYER_DAMPING = 0.03
-
-# Friction between objects
 PLAYER_FRICTION = 0.01
 WALL_FRICTION = 0.2
 DYNAMIC_ITEM_FRICTION = 0.3
-
-# Mass (defaults to 1)
 PLAYER_MASS = 1.5
-
-# Keep player from going too fast
 PLAYER_MAX_HORIZONTAL_SPEED = 1500
 PLAYER_MAX_VERTICAL_SPEED = 1800
-
-# Force applied while on the ground
 PLAYER_MOVE_FORCE_ON_GROUND = 1500
-
-# Force applied when moving left/right in the air
 PLAYER_MOVE_FORCE_IN_AIR = 1000
+PLAYER_JUMP_IMPULSE = 2000
 
-# Strength of a jump
-PLAYER_JUMP_IMPULSE = 1600
 
 class GameView(arcade.View):
-    """Main application class."""
+    """Main game view class."""
 
     def __init__(self):
-        """
-        Initializer
-        """
+        """Initialize the game view."""
         super().__init__()
 
-        # Tilemap Object
+        # Game state
+        self.score = 0
+        self.game_over = False
+        self.level_complete = False  # Added new state variable
+
+        # Player properties
+        self.player_sprite = None
+        self.player_rotation = 0
+        self.player_state = SKIING
+
+        # Input tracking
+        self.left_pressed = False
+        self.right_pressed = False
+        self.jump_needs_reset = False
+
+        # Map properties
         self.tile_map = None
+        self.end_of_map = 0
 
         # Sprite lists
         self.player_list = None
@@ -66,19 +67,10 @@ class GameView(arcade.View):
         self.coin_list = None
         self.obstacle_list = None
 
-        # Set up the player
-        self.score = 0
-        self.player_sprite = None
-        self.player_rotation = 0  # Tracks rotation in degrees
-        self.player_state = SKIING
+        # Physics engine
+        self.physics_engine = None
 
-        # Control keys
-        self.left_pressed = False
-        self.right_pressed = False
-        self.jump_needs_reset = False
-
-        self.end_of_map = 0
-        self.game_over = False
+        # Performance tracking
         self.last_time = None
         self.frame_count = 0
 
@@ -87,7 +79,37 @@ class GameView(arcade.View):
         self.camera_bounds = None
         self.gui_camera = None
 
-        # Text
+        # UI elements
+        self.fps_text = None
+        self.distance_text = None
+        self.score_text = None
+
+        # Set background color
+        self.background_color = arcade.color.SKY_BLUE
+
+    def setup(self):
+        """Set up the game and initialize variables."""
+        # Initialize sprite lists
+        self.player_list = arcade.SpriteList()
+
+        # Initialize UI elements
+        self._setup_ui()
+
+        # Load map and sprites
+        self._load_map_and_sprites()
+
+        # Set up cameras
+        self._setup_cameras()
+
+        # Set up physics engine
+        self._setup_physics_engine()
+
+        # Reset game state
+        self.game_over = False
+        self.level_complete = False  # Reset level complete flag
+
+    def _setup_ui(self):
+        """Set up UI text elements."""
         self.fps_text = arcade.Text(
             "",
             x=10,
@@ -110,102 +132,46 @@ class GameView(arcade.View):
             font_size=14,
         )
 
-        # Track the current state of what key is pressed
-        self.left_pressed: bool = False
-        self.right_pressed: bool = False
+    def _load_map_and_sprites(self):
+        """Load the map and initialize game sprites."""
+        # Load the tilemap
+        map_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "map/Level1.tmj")
+        layer_options = {
+            "Platforms": {"use_spatial_hash": True},
+            "Obstacles": {"use_spatial_hash": True},
+            "Coins": {"use_spatial_hash": True}
+        }
 
-        # Physics engine
-        self.physics_engine: arcade.PymunkPhysicsEngine | None = None
+        self.tile_map = arcade.load_tilemap(
+            map_path, layer_options=layer_options, scaling=TILE_SCALING
+        )
+        self.end_of_map = self.tile_map.width * GRID_PIXEL_SIZE
 
-        # Set background color
-        self.background_color = arcade.color.SKY_BLUE
+        # Get map layers
+        self.terrain_list = self.tile_map.sprite_lists.get("Terrain")
+        self.coin_list = self.tile_map.sprite_lists.get("Collectibles")
+        self.obstacle_list = self.tile_map.sprite_lists.get("Obstacles")
 
-    def setup(self):
-        """Set up the game and initialize the variables."""
+        # Create player sprite
+        player_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "assets/Sprites/shakira.png")
+        self.player_sprite = arcade.Sprite(player_path, scale=PLAYER_SCALING)
 
-        # Sprite lists
-        self.player_list = arcade.SpriteList()
+        # Position player at top left of map
+        self.player_sprite.center_x = GRID_PIXEL_SIZE * 2
+        self.player_sprite.center_y = (self.tile_map.height * GRID_PIXEL_SIZE -
+                                       GRID_PIXEL_SIZE * 2 + 128)
 
-        # Try to load your map file - use current directory path instead of hardcoded
-        try:
-            map_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "map/Level1.tmj")
+        self.player_rotation = 0
+        self.player_state = SKIING
+        self.player_list.append(self.player_sprite)
 
-            layer_options = {
-                "Platforms": {"use_spatial_hash": True},
-                "Obstacles": {"use_spatial_hash": True},
-                "Coins": {"use_spatial_hash": True}
-            }
-
-            # Read in the tiled map
-            self.tile_map = arcade.load_tilemap(
-                map_name, layer_options=layer_options, scaling=TILE_SCALING
-            )
-            self.end_of_map = self.tile_map.width * GRID_PIXEL_SIZE
-
-            # Set up the terrain, obstacles, and collectibles layers
-            self.terrain_list = self.tile_map.sprite_lists.get("Terrain")
-            self.coin_list = self.tile_map.sprite_lists.get("Collectibles")
-            self.obstacle_list = self.tile_map.sprite_lists.get("Obstacles")
-
-            # Set up the player - use built-in resource instead of file
-            self.player_sprite = arcade.Sprite(
-                os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/Sprites/shakira.png"),
-                scale=PLAYER_SCALING,
-            )
-
-            # Position player at top left of the map with a small offset
-            # The player should be positioned on top of terrain
-            self.player_sprite.center_x = GRID_PIXEL_SIZE * 2  # Small offset from left edge
-            self.player_sprite.center_y = self.tile_map.height * GRID_PIXEL_SIZE - GRID_PIXEL_SIZE * 2 +128  # Near top edge
-
-            self.player_rotation = 0
-            self.player_state = SKIING
-            self.player_list.append(self.player_sprite)
-
-            # Set up physics engine
-            if self.terrain_list:
-                self.physics_engine = arcade.PhysicsEnginePlatformer(
-                    self.player_sprite,
-                    gravity_constant=GRAVITY,
-                    walls=self.terrain_list
-                )
-            else:
-                print("Warning: No terrain layer found in the map")
-                # Create a basic physics engine with no walls
-                self.physics_engine = arcade.PhysicsEnginePlatformer(
-                    self.player_sprite,
-                    gravity_constant=GRAVITY,
-                    walls=arcade.SpriteList()
-                )
-
-        except Exception as e:
-            print(f"Error loading map: {e}")
-            # Create a basic scene if map loading fails
-            self.terrain_list = arcade.SpriteList(use_spatial_hash=True)
-            self.coin_list = arcade.SpriteList(use_spatial_hash=True)
-            self.obstacle_list = arcade.SpriteList(use_spatial_hash=True)
-
-            # Create basic player
-            self.player_sprite = arcade.Sprite(
-                ":resources:images/animated_characters/female_person/femalePerson_idle.png",
-                scale=PLAYER_SCALING,
-            )
-            self.player_sprite.center_x = GRID_PIXEL_SIZE * 2
-            self.player_sprite.center_y = WINDOW_HEIGHT - GRID_PIXEL_SIZE * 2
-            self.player_list.append(self.player_sprite)
-
-            # Create a basic physics engine with no walls
-            self.physics_engine = arcade.PhysicsEnginePlatformer(
-                self.player_sprite,
-                gravity_constant=GRAVITY,
-                walls=arcade.SpriteList()
-            )
-
-        # Set up the camera and camera bounds
+    def _setup_cameras(self):
+        """Set up game cameras."""
         self.camera = arcade.Camera2D()
         self.gui_camera = arcade.Camera2D()
 
-        # Use the tilemap to limit the camera's position, or use default values if tilemap isn't loaded
+        # Define camera bounds
         if self.tile_map:
             max_x = GRID_PIXEL_SIZE * self.tile_map.width
             max_y = GRID_PIXEL_SIZE * self.tile_map.height
@@ -218,45 +184,24 @@ class GameView(arcade.View):
             self.window.height / 2.0, max_y
         )
 
-        # Set initial camera position to top left of map
+        # Set initial camera position
         if self.tile_map:
-            # Calculate position for top-left view
-            left_edge = self.window.width / 2.0  # Half window from left edge
-            top_edge = max_y - self.window.height / 2.0  # Top edge minus half window height
-
-            # Set camera position directly instead of panning
+            left_edge = self.window.width / 2.0
+            top_edge = max_y - self.window.height / 2.0
             self.camera.position = (left_edge, top_edge)
 
-        # After setting the initial camera position, call pan to player
-        self.pan_camera_to_user(1.0)  # Use full panning to quickly move to player
-        self.game_over = False
+        # Center camera on player
+        self.pan_camera_to_user(1.0)
 
-        # --- Pymunk Physics Engine Setup ---
+    def _setup_physics_engine(self):
+        """Set up the Pymunk physics engine."""
+        # Create physics engine with gravity
+        self.physics_engine = arcade.PymunkPhysicsEngine(
+            damping=DEFAULT_DAMPING,
+            gravity=(0, -GRAVITY)
+        )
 
-        # The default damping for every object controls the percent of velocity
-        # the object will keep each second. A value of 1.0 is no speed loss,
-        # 0.9 is 10% per second, 0.1 is 90% per second.
-        # For top-down games, this is basically the friction for moving objects.
-        # For platformers with gravity, this should probably be set to 1.0.
-        # Default value is 1.0 if not specified.
-        damping = DEFAULT_DAMPING
-
-        # Set the gravity. (0, 0) is good for outer space and top-down.
-        gravity = (0, -GRAVITY)
-
-        # Create the physics engine
-        self.physics_engine = arcade.PymunkPhysicsEngine(damping=damping, gravity=gravity)
-
-        # Add the player.
-        # For the player, we set the damping to a lower value, which increases
-        # the damping rate. This prevents the character from traveling too far
-        # after the player lets off the movement keys.
-        # Setting the moment of inertia to PymunkPhysicsEngine.MOMENT_INF prevents it from
-        # rotating.
-        # Friction normally goes between 0 (no friction) and 1.0 (high friction)
-        # Friction is between two objects in contact. It is important to remember
-        # in top-down games that friction moving along the 'floor' is controlled
-        # by damping.
+        # Add player to physics engine
         self.physics_engine.add_sprite(
             self.player_sprite,
             friction=PLAYER_FRICTION,
@@ -267,65 +212,70 @@ class GameView(arcade.View):
             max_vertical_velocity=PLAYER_MAX_VERTICAL_SPEED,
         )
 
-        # Create the walls.
-        # By setting the body type to PymunkPhysicsEngine.STATIC the walls can't
-        # move.
-        # Movable objects that respond to forces are PymunkPhysicsEngine.DYNAMIC
-        # PymunkPhysicsEngine.KINEMATIC objects will move, but are assumed to be
-        # repositioned by code and don't respond to physics forces.
-        # Dynamic is default.
-        self.physics_engine.add_sprite_list(
-            self.terrain_list,
-            friction=WALL_FRICTION,
-            collision_type="wall",
-            body_type=arcade.PymunkPhysicsEngine.STATIC,
-        )
+        # Add terrain as static bodies
+        if self.terrain_list:
+            self.physics_engine.add_sprite_list(
+                self.terrain_list,
+                friction=WALL_FRICTION,
+                collision_type="wall",
+                body_type=arcade.PymunkPhysicsEngine.STATIC,
+            )
 
-        # Create the items
-        self.physics_engine.add_sprite_list(
-            self.obstacle_list, friction=DYNAMIC_ITEM_FRICTION, collision_type="item"
-        )
+        # Add obstacles as dynamic bodies
+        if self.obstacle_list:
+            self.physics_engine.add_sprite_list(
+                self.obstacle_list,
+                friction=DYNAMIC_ITEM_FRICTION,
+                collision_type="item"
+            )
 
     def on_draw(self):
-        """
-        Render the screen.
-        """
-
-        # Set background color to blue
+        """Render the screen."""
+        # Clear screen and set background
+        self.clear()
         arcade.set_background_color(arcade.color.SKY_BLUE)
 
-        # This command has to happen before we start drawing
+        # Use game camera for world elements
         self.camera.use()
-        self.clear()
 
-        # Start counting frames
+        # Increment frame counter
         self.frame_count += 1
 
-        # Draw all the sprites
+        # Draw game elements
+        self._draw_game_elements()
+
+        # Use GUI camera for UI elements
+        self.gui_camera.use()
+
+        # Draw UI elements
+        self._draw_ui_elements()
+
+    def _draw_game_elements(self):
+        """Draw all game elements."""
+        # Draw map elements if they exist
         if self.terrain_list:
             self.terrain_list.draw()
         if self.coin_list:
             self.coin_list.draw()
         if self.obstacle_list:
             self.obstacle_list.draw()
+
+        # Draw player
         self.player_list.draw()
 
-        # Activate GUI camera for FPS, distance and hit boxes
-        self.gui_camera.use()
-
-        # Calculate FPS if conditions are met
+    def _draw_ui_elements(self):
+        """Draw all UI elements."""
+        # Update and draw FPS
         if self.last_time and self.frame_count % 60 == 0:
             fps = round(1.0 / (time.time() - self.last_time) * 60)
             self.fps_text.text = f"FPS: {fps:3d}"
-
-        # Draw FPS text
         self.fps_text.draw()
 
-        # Get time for every 60 frames
+        # Update time for FPS calculation
         if self.frame_count % 60 == 0:
             self.last_time = time.time()
 
-        # Get distance and draw text
+        # Update and draw distance
         distance = self.player_sprite.right
         self.distance_text.text = f"Distance: {distance:.1f}"
         self.distance_text.draw()
@@ -334,8 +284,27 @@ class GameView(arcade.View):
         self.score_text.text = f"Score: {self.score}"
         self.score_text.draw()
 
-        # Draw game over text if condition met
-        if self.game_over:
+        # Draw level complete message if applicable
+        if self.level_complete:
+            arcade.draw_text(
+                "Level Complete! - Press N for Next Level",
+                self.window.width // 2,
+                self.window.height // 2,
+                arcade.color.GREEN,
+                30,
+                anchor_x="center"
+            )
+            arcade.draw_text(
+                f"Final Score: {self.score}",
+                self.window.width // 2,
+                self.window.height // 2 - 40,
+                arcade.color.GREEN,
+                20,
+                anchor_x="center"
+            )
+
+        # Draw game over text if applicable
+        elif self.game_over:
             arcade.draw_text(
                 "Game Over - Press R to Restart",
                 self.window.width // 2,
@@ -346,90 +315,103 @@ class GameView(arcade.View):
             )
 
     def on_key_press(self, key, modifiers):
-        """Called whenever a key is pressed."""
+        """Handle key press events."""
         if self.game_over:
+            # Restart game if 'R' is pressed
             if key == arcade.key.R:
                 self.setup()
                 self.score = 0
                 return
+        elif self.level_complete:
+            # Go to next level if 'N' is pressed
+            if key == arcade.key.N:
+                # Here you would load the next level
+                # For now, we'll just restart the current level
+                self.setup()
+                self.score = 0
+                return
+        else:
+            # Jump if space is pressed and player is on ground
+            if key == arcade.key.SPACE:
+                if self.physics_engine.is_on_ground(self.player_sprite):
+                    impulse = (0, PLAYER_JUMP_IMPULSE)
+                    self.physics_engine.apply_impulse(self.player_sprite, impulse)
 
-        elif key == arcade.key.SPACE:
-            # find out if player is standing on ground
-            if self.physics_engine.is_on_ground(self.player_sprite):
-                # She is! Go ahead and jump
-                impulse = (0, PLAYER_JUMP_IMPULSE)
-                self.physics_engine.apply_impulse(self.player_sprite, impulse)
-
+        # Show pause screen if Escape is pressed
         if key == arcade.key.ESCAPE:
-            # pass self, the current view, to preserve this view's state
-            pause = PauseView(self)
-            self.window.show_view(pause)
+            pause_view = PauseView(self)
+            self.window.show_view(pause_view)
 
     def on_key_release(self, key, modifiers):
-        """Called whenever a key is released."""
+        """Handle key release events."""
         if key == arcade.key.SPACE:
             self.jump_needs_reset = False
 
-    # def update_player_rotation(self):
-    #     """Update player rotation based on keys and state."""
-    #     if self.player_state == JUMPING:
-    #         # Apply rotation only when jumping
-    #         if self.left_pressed:
-    #             self.player_rotation -= ROTATION_SPEED
-    #         if self.right_pressed:
-    #             self.player_rotation += ROTATION_SPEED
-    #
-    #         # Keep rotation between 0 and 360 degrees
-    #         self.player_rotation %= 360
-    #
-    #         # Update the sprite's rotation
-    #         self.player_sprite.angle = self.player_rotation
-    #     elif self.player_state == SKIING and self.physics_engine.can_jump():
-    #         # Check if landing was bad (not upright)
-    #         # We consider "upright" to be within 45 degrees of 0 or 360
-    #         upright_angle = (self.player_rotation % 360)
-    #         if not (upright_angle < 45 or upright_angle > 315):
-    #             # Bad landing - game over!
-    #             self.game_over = True
-    #         else:
-    #             # Good landing - reset rotation to zero
-    #             self.player_rotation = 0
-    #             self.player_sprite.angle = 0
-
     def on_update(self, delta_time):
-        """Movement and game logic"""
-        is_on_ground = self.physics_engine.is_on_ground(self.player_sprite)
-
-        # Check for game over conditions
-        if (self.player_sprite.right >= self.end_of_map or
-                self.player_sprite.center_y < -100 or
-                self.game_over):
-            self.game_over = True
+        """Update game state and logic."""
+        # Skip updates if game is over or level is complete
+        if self.game_over or self.level_complete:
             return
 
-        # Check if player is jumping or skiing
-        # if self.physics_engine:
-        #     if not self.physics_engine.can_jump():
-        #         self.player_state = JUMPING
-        #     else:
-        #         if self.player_state == JUMPING:
-        #             # Player just landed
-        #             self.player_state = SKIING
+        # Check for game over conditions
+        self._check_end_conditions()
 
-        # Update player rotation
-        # self.update_player_rotation()
+        # Skip the rest of updates if game is over or level is complete after check
+        if self.game_over or self.level_complete:
+            return
 
+        # Update player state and position
+        self._update_player_state()
 
-        # Update physics engine
-        # if self.physics_engine:
-        #     self.physics_engine.update()
+        # Check for collisions
+        self._handle_collisions()
 
-        # Check for collectible collisions
+        # Update camera position
+        self.pan_camera_to_user(CAMERA_PAN_SPEED)
+
+    def _check_end_conditions(self):
+        """Check if any end conditions are met."""
+        # Check if player reached the end of the map
+        if self.player_sprite.right >= self.end_of_map:
+            self.level_complete = True
+            self.player_state = LEVEL_COMPLETE
+            return
+
+        # Check if player fell off the map
+        if self.player_sprite.center_y < -100:
+            self.game_over = True
+            self.player_state = GAME_OVER
+            return
+
+    def _update_player_state(self):
+        """Update player state and physics."""
+        # Check if player is on ground
+        is_on_ground = self.physics_engine.is_on_ground(self.player_sprite)
+
+        # Apply appropriate force based on ground contact
+        if is_on_ground:
+            force = (PLAYER_MOVE_FORCE_ON_GROUND, 0)
+        else:
+            force = (PLAYER_MOVE_FORCE_IN_AIR, 0)
+
+        # Apply force to player
+        self.physics_engine.apply_force(self.player_sprite, force)
+
+        # Set friction to zero while moving
+        self.physics_engine.set_friction(self.player_sprite, 0)
+
+        # Update physics simulation
+        self.physics_engine.step()
+
+    def _handle_collisions(self):
+        """Handle collisions with coins and obstacles."""
+        # Check for coin collisions
         if self.coin_list:
             coins_hit = arcade.check_for_collision_with_list(
                 self.player_sprite, self.coin_list
             )
 
+            # Remove collected coins and update score
             for coin in coins_hit:
                 coin.remove_from_sprite_lists()
                 self.score += 1
@@ -440,108 +422,94 @@ class GameView(arcade.View):
                 self.player_sprite, self.obstacle_list
             )
 
+            # Game over if hit obstacle
             if len(obstacle_hit_list) > 0:
                 self.game_over = True
-
-        # Pan to the user
-        self.pan_camera_to_user(CAMERA_PAN_SPEED)
-
-        """Movement and game logic"""
-        # self.physics_engine.set_velocity(self.player_sprite, (MOVEMENT_SPEED, self.player_sprite.change_y))
-        if is_on_ground:
-            force = (PLAYER_MOVE_FORCE_ON_GROUND, 0)
-        else:
-            force = (PLAYER_MOVE_FORCE_IN_AIR, 0)
-        self.physics_engine.apply_force(self.player_sprite, force)
-        # Set friction to zero for the player while moving
-        self.physics_engine.set_friction(self.player_sprite, 0)
-
-        self.physics_engine.step()
+                self.player_state = GAME_OVER
 
     def pan_camera_to_user(self, panning_fraction: float = 1.0):
         """
-        Manage Scrolling
+        Pan camera to follow the player.
 
         Args:
-            panning_fraction:
-                Number from 0 to 1. Higher the number, faster we
-                pan the camera to the user.
+            panning_fraction: Speed of camera movement (0 to 1)
         """
-
-        # This spot would center on the user
+        # Calculate target camera position
         screen_center_x, screen_center_y = self.player_sprite.position
+
+        # Enforce minimum distance from edges
         if screen_center_x < self.camera.viewport_width / 2:
             screen_center_x = self.camera.viewport_width / 2
         if screen_center_y < self.camera.viewport_height / 2:
             screen_center_y = self.camera.viewport_height / 2
+
+        # Set target position
         user_centered = screen_center_x, screen_center_y
 
+        # Smoothly move camera toward target
         self.camera.position = arcade.math.lerp_2d(
             self.camera.position,
             user_centered,
             panning_fraction,
         )
-    # def pan_camera_to_user(self, panning_fraction: float = 1.0):
-    #     """ Manage Scrolling """
-    #     # Make sure player sprite exists
-    #     if not hasattr(self, 'player_sprite') or self.player_sprite is None:
-    #         return
-    #
-    #     self.camera.position = arcade.math.smerp_2d(
-    #         self.camera.position,
-    #         self.player_sprite.position,
-    #         self.window.delta_time,
-    #         panning_fraction,
-    #     )
-    #
-    #     if hasattr(self, 'camera_bounds') and self.camera_bounds is not None:
-    #         self.camera.position = arcade.camera.grips.constrain_xy(
-    #             self.camera.view_data,
-    #             self.camera_bounds
-    #         )
+
 
 class PauseView(arcade.View):
+    """View shown when game is paused."""
+
     def __init__(self, game_view):
+        """Initialize pause view."""
         super().__init__()
         self.game_view = game_view
 
     def on_show_view(self):
+        """Set up the pause screen."""
         self.window.background_color = arcade.color.WHITE_SMOKE
 
     def on_draw(self):
+        """Draw the pause screen."""
         self.clear()
 
-        # Draw player, for effect, on pause screen.
-        # The previous View (GameView) was passed in
-        # and saved in self.game_view.
+        # Draw player with orange overlay
         player_sprite = self.game_view.player_sprite
         arcade.draw_sprite(player_sprite)
 
-        # draw an orange filter over him
-        arcade.draw_lrbt_rectangle_filled(left=player_sprite.left,
-                                          right=player_sprite.right,
-                                          bottom=player_sprite.bottom,
-                                          top=player_sprite.top,
-                                          color=arcade.color.ORANGE[:3] + (200,))
+        arcade.draw_lrbt_rectangle_filled(
+            left=player_sprite.left,
+            right=player_sprite.right,
+            bottom=player_sprite.bottom,
+            top=player_sprite.top,
+            color=arcade.color.ORANGE[:3] + (200,)
+        )
 
-        arcade.draw_text("PAUSED", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 50,
-                         arcade.color.BLACK, font_size=50, anchor_x="center")
+        # Draw pause text
+        arcade.draw_text(
+            "PAUSED",
+            WINDOW_WIDTH / 2,
+            WINDOW_HEIGHT / 2 + 50,
+            arcade.color.BLACK,
+            font_size=50,
+            anchor_x="center"
+        )
 
-        # Show tip to return or reset
-        arcade.draw_text("Press Esc. to return",
-                         WINDOW_WIDTH / 2,
-                         WINDOW_HEIGHT / 2,
-                         arcade.color.BLACK,
-                         font_size=20,
-                         anchor_x="center")
+        # Draw instructions
+        arcade.draw_text(
+            "Press Esc. to return",
+            WINDOW_WIDTH / 2,
+            WINDOW_HEIGHT / 2,
+            arcade.color.BLACK,
+            font_size=20,
+            anchor_x="center"
+        )
 
     def on_key_press(self, key, _modifiers):
-        if key == arcade.key.ESCAPE:   # resume game
+        """Handle key press events in pause screen."""
+        if key == arcade.key.ESCAPE:  # Resume game
             self.window.show_view(self.game_view)
 
 
 def main():
-    """Main function"""
+    """Main function to start the game."""
     window = arcade.Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
     game = GameView()
     window.show_view(game)
