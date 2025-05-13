@@ -2,7 +2,7 @@ import arcade
 import os
 import time
 
-TILE_SCALING = 0.5
+TILE_SCALING = 0.8
 PLAYER_SCALING = 1
 
 WINDOW_WIDTH = 1280
@@ -21,19 +21,19 @@ GAME_OVER = 2
 # --- Physics forces. Higher number, faster accelerating.
 
 # Gravity
-GRAVITY = 2500
+GRAVITY = 2000
 
 # Damping - Amount of speed lost per second
-DEFAULT_DAMPING = 0.05
+DEFAULT_DAMPING = 0.06
 PLAYER_DAMPING = 0.03
 
 # Friction between objects
-PLAYER_FRICTION = 0.01
+PLAYER_FRICTION = 0.00
 WALL_FRICTION = 0.2
 DYNAMIC_ITEM_FRICTION = 0.3
 
 # Mass (defaults to 1)
-PLAYER_MASS = 1.5
+PLAYER_MASS = 1
 
 # Keep player from going too fast
 PLAYER_MAX_HORIZONTAL_SPEED = 1500
