@@ -128,7 +128,7 @@ class GameView(arcade.View):
 
         # Try to load your map file - use current directory path instead of hardcoded
         try:
-            map_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "map/Level1.tmj")
+            map_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Probe.tmj")
 
             layer_options = {
                 "Platforms": {"use_spatial_hash": True},
