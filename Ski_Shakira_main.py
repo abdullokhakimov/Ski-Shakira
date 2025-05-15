@@ -58,7 +58,7 @@ POINTS_PER_FLIP = 10
 BONUS_MESSAGE_DURATION = 2.0
 
 # Lighting constants for level 2
-SPOTLIGHT_RADIUS = 250
+SPOTLIGHT_RADIUS = 350
 AMBIENT_LIGHT_COLOR = (20, 20, 20, 255)
 SPOTLIGHT_COLOR = arcade.csscolor.WHITE
 
@@ -530,7 +530,7 @@ class GameView(arcade.View):
     def _update_lighting(self):
         """Update the position of the player's spotlight."""
         if self.current_level == 2 and self.player_light:
-            self.player_light.position = (self.player_sprite.center_x, self.player_sprite.center_y)
+            self.player_light.position = (self.player_sprite.center_x+200, self.player_sprite.center_y)
 
     def _update_dance_animation(self, delta_time):
         """Update the dance animation frames."""
