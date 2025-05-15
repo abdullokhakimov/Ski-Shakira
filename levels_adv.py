@@ -19,6 +19,7 @@ SKIING = 0
 JUMPING = 1
 GAME_OVER = 2
 LEVEL_COMPLETE = 3  # Added new state for level completion
+DANCING = 4  # New state for dancing animation
 
 # Physics constants
 GRAVITY = 2500
@@ -33,6 +34,9 @@ PLAYER_MAX_VERTICAL_SPEED = 1800
 PLAYER_MOVE_FORCE_ON_GROUND = 1500
 PLAYER_MOVE_FORCE_IN_AIR = 1000
 PLAYER_JUMP_IMPULSE = 2000
+
+# Animation constants
+DANCE_ANIMATION_SPEED = 0.3  # Time between frames in seconds
 
 
 class GameView(arcade.View):
@@ -55,6 +59,12 @@ class GameView(arcade.View):
         self.player_sprite = None
         self.player_rotation = 0
         self.player_state = SKIING
+
+        # Animation properties
+        self.dance_textures = []
+        self.current_dance_frame = 0
+        self.dance_timer = 0
+        self.dance_start_time = None
 
         # Input tracking
         self.left_pressed = False
@@ -100,6 +110,9 @@ class GameView(arcade.View):
         # Initialize UI elements
         self._setup_ui()
 
+        # Load animation textures
+        self._load_dance_textures()
+
         # Load map and sprites for the current level
         self._load_level(self.current_level)
 
@@ -112,6 +125,20 @@ class GameView(arcade.View):
         # Reset game state
         self.game_over = False
         self.level_complete = False  # Reset level complete flag
+        self.player_state = SKIING  # Reset player state
+
+    def _load_dance_textures(self):
+        """Load the dance animation textures."""
+        self.dance_textures = []
+
+        # Load the four dancing animation frames
+        for i in range(1, 5):
+            texture_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                f"assets/Sprites/shakira_dance{i}.png"
+            )
+            texture = arcade.load_texture(texture_path)
+            self.dance_textures.append(texture)
 
     def _setup_ui(self):
         """Set up UI text elements."""
@@ -386,8 +413,13 @@ class GameView(arcade.View):
 
     def on_update(self, delta_time):
         """Update game state and logic."""
-        # Skip updates if game is over or level is complete
-        if self.game_over or self.level_complete:
+        # Skip updates if game is over
+        if self.game_over:
+            return
+
+        # Handle dancing animation if level is complete
+        if self.level_complete:
+            self._update_dance_animation(delta_time)
             return
 
         # Check for game over conditions
@@ -395,6 +427,12 @@ class GameView(arcade.View):
 
         # Skip the rest of updates if game is over or level is complete after check
         if self.game_over or self.level_complete:
+            if self.level_complete:
+                # Start dancing when level is complete
+                self.player_state = DANCING
+                self.dance_start_time = time.time()
+                self.current_dance_frame = 0
+                self.dance_timer = 0
             return
 
         # Update player state and position
@@ -406,12 +444,35 @@ class GameView(arcade.View):
         # Update camera position
         self.pan_camera_to_user(CAMERA_PAN_SPEED)
 
+    def _update_dance_animation(self, delta_time):
+        """Update the dance animation frames."""
+        if self.player_state != DANCING:
+            return
+
+        # Update dance animation timer
+        self.dance_timer += delta_time
+
+        # Change animation frame when timer exceeds frame duration
+        if self.dance_timer >= DANCE_ANIMATION_SPEED:
+            self.dance_timer = 0
+            self.current_dance_frame = (self.current_dance_frame + 1) % len(self.dance_textures)
+
+            # Update the player sprite texture
+            if self.dance_textures and len(self.dance_textures) > 0:
+                self.player_sprite.texture = self.dance_textures[self.current_dance_frame]
+
     def _check_end_conditions(self):
         """Check if any end conditions are met."""
         # Check if player reached the end of the map
         if self.player_sprite.right >= self.end_of_map:
             self.level_complete = True
-            self.player_state = LEVEL_COMPLETE
+            self.player_state = DANCING  # Switch to dancing state
+            self.dance_start_time = time.time()
+            self.current_dance_frame = 0
+            self.dance_timer = 0
+            # Set initial dance frame
+            if self.dance_textures and len(self.dance_textures) > 0:
+                self.player_sprite.texture = self.dance_textures[0]
             return
 
         # Check if player fell off the map
