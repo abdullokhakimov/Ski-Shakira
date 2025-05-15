@@ -1,7 +1,6 @@
 import arcade
 import os
 import time
-from typing import Optional
 import math
 from arcade.future.light import Light, LightLayer  # Updated import for lighting
 
