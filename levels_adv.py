@@ -94,18 +94,12 @@ class GameView(arcade.View):
         # Physics engine
         self.physics_engine = None
 
-        # Performance tracking
-        self.last_time = None
-        self.frame_count = 0
-
         # Cameras
         self.camera = None
         self.camera_bounds = None
         self.gui_camera = None
 
         # UI elements
-        self.fps_text = None
-        self.distance_text = None
         self.score_text = None
         self.level_text = None
 
@@ -142,33 +136,21 @@ class GameView(arcade.View):
 
     def _setup_ui(self):
         """Set up UI text elements."""
-        self.fps_text = arcade.Text(
-            "",
-            x=10,
-            y=40,
-            color=arcade.color.BLACK,
-            font_size=14
-        )
-        self.distance_text = arcade.Text(
-            "0.0",
-            x=10,
-            y=20,
-            color=arcade.color.BLACK,
-            font_size=14,
-        )
         self.score_text = arcade.Text(
             "Score: 0",
-            x=10,
-            y=60,
+            x=WINDOW_WIDTH - 10,
+            y=WINDOW_HEIGHT - 50,
             color=arcade.color.BLACK,
-            font_size=14,
+            font_size=20,
+            anchor_x="right"
         )
         self.level_text = arcade.Text(
             f"Level: {self.current_level}/{self.max_level}",
-            x=10,
-            y=80,
+            x=WINDOW_WIDTH - 10,
+            y=WINDOW_HEIGHT - 20,
             color=arcade.color.BLACK,
-            font_size=14,
+            font_size=15,
+            anchor_x="right"
         )
 
     def _load_level(self, level_number):
@@ -269,7 +251,6 @@ class GameView(arcade.View):
         self.clear()
         arcade.set_background_color(arcade.color.SKY_BLUE)
         self.camera.use()
-        self.frame_count += 1
         self._draw_game_elements()
         self.gui_camera.use()
         self._draw_ui_elements()
@@ -287,22 +268,8 @@ class GameView(arcade.View):
 
     def _draw_ui_elements(self):
         """Draw all UI elements."""
-        if self.last_time and self.frame_count % 60 == 0:
-            fps = round(1.0 / (time.time() - self.last_time) * 60)
-            self.fps_text.text = f"FPS: {fps:3d}"
-        self.fps_text.draw()
-
-        if self.frame_count % 60 == 0:
-            self.last_time = time.time()
-
-        distance = self.player_sprite.right
-        self.distance_text.text = f"Distance: {distance:.1f}"
-        self.distance_text.draw()
-
         self.score_text.text = f"Score: {self.score}"
         self.score_text.draw()
-
-        self.level_text.text = f"Level: {self.current_level}/{self.max_level}"
         self.level_text.draw()
 
         # Draw bonus message with fade effect
@@ -486,11 +453,12 @@ class GameView(arcade.View):
                     bonus_points = flips * POINTS_PER_FLIP
                     self.score += bonus_points
                     self.bonus_message = arcade.Text(
-                        f"Flip Bonus: +{bonus_points} points",
-                        x=10,
-                        y=100,
+                        f"Flipping Bonus: +{bonus_points} points",
+                        x=WINDOW_WIDTH - 10,
+                        y=WINDOW_HEIGHT - 80,
                         color=arcade.color.GREEN,
                         font_size=20,
+                        anchor_x="right"
                     )
                     self.bonus_timer = BONUS_MESSAGE_DURATION
                 # Reset rotation and flip counter
