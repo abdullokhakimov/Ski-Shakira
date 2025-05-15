@@ -1,111 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Schnee" tilewidth="128" tileheight="128" tilecount="34" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="Schnee" tilewidth="128" tileheight="128" tilecount="25" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
- <tile id="46">
-  <image source="../assets/Tiles/New Piskel-1.png (1).png" width="128" height="128"/>
- </tile>
- <tile id="47">
-  <image source="../assets/Tiles/New Piskel-1.png (2).png" width="128" height="128"/>
- </tile>
- <tile id="48">
-  <image source="../assets/Tiles/New Piskel-2.png (1).png" width="128" height="128"/>
- </tile>
- <tile id="49">
-  <image source="../assets/Tiles/New Piskel-2.png (2).png" width="128" height="128"/>
- </tile>
- <tile id="50">
-  <image source="../assets/Tiles/New Piskel-2.png (3).png" width="128" height="128"/>
- </tile>
- <tile id="51">
-  <image source="../assets/Tiles/New Piskel-2.png (4).png" width="128" height="128"/>
- </tile>
- <tile id="52">
-  <image source="../assets/Tiles/New Piskel-3.png (1).png" width="128" height="128"/>
- </tile>
- <tile id="53">
-  <image source="../assets/Tiles/New Piskel-3.png (2).png" width="128" height="128"/>
- </tile>
- <tile id="54">
-  <image source="../assets/Tiles/rock.png" width="128" height="128"/>
- </tile>
- <tile id="55">
+ <tile id="0">
   <image source="../assets/Tiles/snow.png" width="128" height="128"/>
  </tile>
- <tile id="56">
+ <tile id="1">
   <image source="../assets/Tiles/snow_pile.png" width="128" height="128"/>
+  <objectgroup draworder="index" id="3">
+   <object id="3" x="8.09578" y="103.51" width="114.497" height="24.5765">
+    <ellipse/>
+   </object>
+  </objectgroup>
  </tile>
- <tile id="57">
+ <tile id="2">
   <image source="../assets/Tiles/snowCenter.png" width="128" height="128"/>
  </tile>
- <tile id="58">
+ <tile id="3">
   <image source="../assets/Tiles/snowCenter_rounded.png" width="128" height="128"/>
  </tile>
- <tile id="59">
+ <tile id="4">
   <image source="../assets/Tiles/snowCliff_left.png" width="128" height="128"/>
  </tile>
- <tile id="60">
+ <tile id="5">
   <image source="../assets/Tiles/snowCliff_right.png" width="128" height="128"/>
  </tile>
- <tile id="61">
+ <tile id="6">
   <image source="../assets/Tiles/snowCliffAlt_left.png" width="128" height="128"/>
  </tile>
- <tile id="62">
+ <tile id="7">
   <image source="../assets/Tiles/snowCliffAlt_right.png" width="128" height="128"/>
  </tile>
- <tile id="63">
+ <tile id="8">
   <image source="../assets/Tiles/snowCorner_left.png" width="128" height="128"/>
  </tile>
- <tile id="64">
-  <image source="../assets/Tiles/snowCorner_left-1.png.png" width="128" height="128"/>
- </tile>
- <tile id="65">
+ <tile id="9">
   <image source="../assets/Tiles/snowCorner_right.png" width="128" height="128"/>
  </tile>
- <tile id="66">
+ <tile id="10">
   <image source="../assets/Tiles/snowHalf.png" width="128" height="128"/>
  </tile>
- <tile id="67">
+ <tile id="11">
   <image source="../assets/Tiles/snowHalf_left.png" width="128" height="128"/>
  </tile>
- <tile id="68">
+ <tile id="12">
   <image source="../assets/Tiles/snowHalf_mid.png" width="128" height="128"/>
  </tile>
- <tile id="69">
+ <tile id="13">
   <image source="../assets/Tiles/snowHalf_right.png" width="128" height="128"/>
  </tile>
- <tile id="70">
+ <tile id="14">
   <image source="../assets/Tiles/snowHill_left.png" width="128" height="128"/>
  </tile>
- <tile id="71">
+ <tile id="15">
   <image source="../assets/Tiles/snowHill_right.png" width="128" height="128"/>
  </tile>
- <tile id="72">
+ <tile id="16">
   <image source="../assets/Tiles/snowLeft.png" width="128" height="128"/>
  </tile>
- <tile id="73">
+ <tile id="17">
   <image source="../assets/Tiles/snowMid.png" width="128" height="128"/>
  </tile>
- <tile id="74">
+ <tile id="18">
   <image source="../assets/Tiles/snowRight.png" width="128" height="128"/>
  </tile>
- <tile id="75">
-  <image source="../assets/Tiles/spikes.png" width="128" height="128"/>
- </tile>
- <tile id="76">
-  <image source="../assets/Tiles/star.png" width="128" height="128"/>
- </tile>
- <tile id="77">
+ <tile id="19">
   <image source="../assets/Tiles/water.png" width="128" height="128"/>
  </tile>
- <tile id="78">
+ <tile id="20">
   <image source="../assets/Tiles/waterTop_high.png" width="128" height="128"/>
  </tile>
- <tile id="79">
+ <tile id="21">
   <image source="../assets/Tiles/waterTop_low.png" width="128" height="128"/>
  </tile>
- <wangsets>
-  <wangset name="Unnamed Set" type="mixed" tile="-1">
-   <wangcolor name="Schnee" color="#ff0000" tile="-1" probability="1"/>
-  </wangset>
- </wangsets>
+ <tile id="22">
+  <image source="../assets/Tiles/star.png" width="128" height="128"/>
+ </tile>
+ <tile id="23">
+  <image source="../assets/Tiles/rock.png" width="128" height="128"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="55" width="128" height="73"/>
+   <object id="3" x="0.867405" y="101.486">
+    <polygon points="0,0 40.768,-45.105 89.0535,-33.5396 107.269,-3.46962 125.485,0.867405 118.834,26.3113 12.1437,26.3113"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="24">
+  <image source="../assets/Tiles/spikes.png" width="128" height="128"/>
+  <objectgroup draworder="index" id="3">
+   <object id="2" x="0.333333" y="64" width="126.333" height="62.6667"/>
+  </objectgroup>
+ </tile>
 </tileset>
