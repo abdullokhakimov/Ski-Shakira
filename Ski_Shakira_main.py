@@ -58,13 +58,13 @@ POINTS_PER_FLIP = 10
 BONUS_MESSAGE_DURATION = 2.0
 
 # Lighting constants for level 2
-SPOTLIGHT_RADIUS = 150
+SPOTLIGHT_RADIUS = 250
 AMBIENT_LIGHT_COLOR = (20, 20, 20, 255)
 SPOTLIGHT_COLOR = arcade.csscolor.WHITE
 
 # Fade constants
 FADE_OUT_DURATION = 2.0
-FADE_IN_DURATION = 3.0
+FADE_IN_DURATION = 2.2
 
 class GameView(arcade.View):
     def __init__(self):
@@ -447,7 +447,6 @@ class GameView(arcade.View):
         """Handle key press events."""
         if self.game_over:
             if key == arcade.key.R:
-                self.current_level = 1
                 self.score = 0
                 self.setup()
                 return
