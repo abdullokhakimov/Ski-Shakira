@@ -22,7 +22,6 @@ GAME_OVER = 2
 LEVEL_COMPLETE = 3
 DANCING = 4
 
-# Gravity
 GRAVITY = 2000
 
 # Damping - Amount of speed lost per second
