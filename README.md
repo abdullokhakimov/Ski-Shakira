@@ -89,7 +89,7 @@ python Ski_Shakira_main.py
 * **Abdulloh Khakimov (@akhakiym)** – Git, Level Design
 * **Elizaveta Chichkanov (@chiliza)** – Game Design
 * **Koustav Agrawal (@koustavagr2005)** – Hauptprogrammierung
-* **Aanjneya Moudgil (@aanjneya)** – Testmanagement
+* **Aanjneya Moudgil (@aanjneya)** – Test und Fehlermanagement
 * **Juanita Giraldo Foronda (@juanisg)** – Grafikdesign
 
 > Obwohl jede\:r eine bestimmte Rolle hatte, unterstützte das Team sich gegenseitig bei der Entwicklung aller Bestandteile.
