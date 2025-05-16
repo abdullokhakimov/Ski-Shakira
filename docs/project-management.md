@@ -33,7 +33,7 @@ Am Anfang gab es nicht nur Plaene, sonder auch Begeisterung fuer das Projekt. De
 ## Kommunikation
 
 Alle Kommunikationen miteinander haben auf WhatsApp stattgefunden. Eine Gruppe wurde erstellt, um als ein Team arbeiten zu koennen.
-    Issues waren auch durch GitLab geteilt. Auf WhatsApp haben wir ToDos geschrieben, und eine Person fuer jeden Punkt verantwortlich gemacht.
+    Issues waren auch durch GitLab geteilt. Auf WhatsApp haben wir To-Dos geschrieben, und eine Person fuer jeden Punkt verantwortlich gemacht.
     Meetings gab es jeden Tag in der Mensa, da wir immer zusammen miteinander sitzen. Aber spezielle Meetings waren auch fast jede Woche zu sehen, indem wir nach Stk in der TU geblieben sind.
     Eine Vielfalt von Geraeten standen zur Verfuegung. Von Macbook bis Windows-Laptop bis iPads, alles war eingesetzt und gebraucht. 
 
