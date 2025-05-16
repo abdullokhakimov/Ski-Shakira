@@ -1,5 +1,7 @@
 # Projektmanagement Dokumentation
 
+Hier schreibt Aanjneya
+
 ## Teamstruktur
 Wir hatten uns entschieden, uns in einer 5er Gruppe zu organisieren, denn wir kannten einander und hatten schon Erfahrung mit Zusammenarbeit. Eine der ersten getroffenen Entscheidungen war die Arbeitsteilung zwischen uns. Es gab Schwierigkeiten damit, weil es paar Rolle gab, die fast alle uebernehmen wollten. Am Ende haben wir uns geeinigt und die Rollen waren so verteilt. 
 
