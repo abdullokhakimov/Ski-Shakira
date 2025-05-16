@@ -33,11 +33,11 @@ Insgesamt wurden **71 Commits** während des Projekts durchgeführt. Die Beiträ
 
 |**Name**| **GitLab-Handle** | **Commits** |**Verantwortungsbereich**|
 |--|--|-------------|--|
-| Abdulloh Khakimov | @akhakiym | 14          | Git-Meister; Level Designer |
+| Abdulloh Khakimov | @akhakiym | 16          | Git-Meister; Level Designer |
 | Elizaveta Chichkanov | @chiliza | 14          | Game Designer |
-| Koustav Agrawal | @koustavagr2005 | 21          | Lead Developer |
-| Juanita Giraldo | @juanisg | 2           | Grafik Designer |
-| Aanjneya Moudgil| @aanjneya | 10          | Test und Fehlermanagement |
+| Koustav Agrawal | @koustavagr2005 | 34          | Lead Developer |
+| Juanita Giraldo | @juanisg | 3           | Grafik Designer |
+| Aanjneya Moudgil| @aanjneya | 12          | Test und Fehlermanagement |
 
 Obwohl jede*r eine bestimmte Rolle hatte, wurde im Team viel **interdisziplinär zusammengearbeitet**. In verschiedenen Phasen des Projekts unterstützten sich die Mitglieder gegenseitig mit ihrem Wissen, z. B. beim Beheben von Fehlern oder beim Feintuning des Leveldesigns.
 
