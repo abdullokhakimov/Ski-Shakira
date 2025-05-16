@@ -31,13 +31,13 @@ Ein Großteil der Entwicklung fand **gemeinsam vor Ort in der Bibliothek** statt
 ## **Statistiken**
 Insgesamt wurden **71 Commits** während des Projekts durchgeführt. Die Beiträge der einzelnen Teammitglieder verteilten sich wie folgt:
 
-|**Name**| **GitLab-Handle** |**Commits** |**Verantwortungsbereich**|
-|--|--|--|--|
-| Abdulloh Khakimov | @akhakiym | 9 | Git-Meister; Level Designer |
-| Elizaveta Chichkanov | @chiliza | 14 | Game Designer |
-| Koustav Agrawal | @koustavagr2005 | 21 | Lead Developer |
-| Juanita Giraldo | @juanisg | 2 | Grafik Designer |
-| Aanjneya Moudgil| @aanjneya | 3 | Test und Fehlermanagement |
+|**Name**| **GitLab-Handle** | **Commits** |**Verantwortungsbereich**|
+|--|--|-------------|--|
+| Abdulloh Khakimov | @akhakiym | 14          | Git-Meister; Level Designer |
+| Elizaveta Chichkanov | @chiliza | 14          | Game Designer |
+| Koustav Agrawal | @koustavagr2005 | 21          | Lead Developer |
+| Juanita Giraldo | @juanisg | 2           | Grafik Designer |
+| Aanjneya Moudgil| @aanjneya | 10          | Test und Fehlermanagement |
 
 Obwohl jede*r eine bestimmte Rolle hatte, wurde im Team viel **interdisziplinär zusammengearbeitet**. In verschiedenen Phasen des Projekts unterstützten sich die Mitglieder gegenseitig mit ihrem Wissen, z. B. beim Beheben von Fehlern oder beim Feintuning des Leveldesigns.
 
