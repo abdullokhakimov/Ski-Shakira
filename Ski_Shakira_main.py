@@ -8,8 +8,8 @@ from arcade.future.light import Light, LightLayer
 TILE_SCALING = 0.5
 PLAYER_SCALING = 0.8
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1220
+WINDOW_HEIGHT = 750
 WINDOW_TITLE = "Ski Platformer"
 SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
@@ -30,7 +30,7 @@ PLAYER_DAMPING = 0.03
 
 # Friction between objects
 PLAYER_FRICTION = 0.00
-WALL_FRICTION = 0.2
+WALL_FRICTION = 10
 DYNAMIC_ITEM_FRICTION = 0.3
 
 # Mass (defaults to 1)
@@ -571,7 +571,10 @@ class GameView(arcade.View):
         if not is_on_ground and self.player_state != GAME_OVER:
             self.player_state = JUMPING
         if is_on_ground and self.player_state == SKIING:
-            self.player_visual_angle = 180 - self.terrain_angle
+            if self.terrain_angle < 0:
+                self.player_visual_angle = 0
+            else:
+                self.player_visual_angle = 180 - self.terrain_angle
         elif not is_on_ground and self.player_state == JUMPING:
             if self.left_pressed:
                 rotation = -FLIP_SPEED * delta_time
