@@ -22,12 +22,6 @@ Ziel des Spiels ist es, Hindernisse zu überwinden, Münzen zu sammeln und das Z
 * **R:** Level neu starten
 * **N:** Zum nächsten Level wechseln
 
----
-
-## ⚠️ Bekannte Einschränkungen
-
-* Terrain-Physik ist in Level 2 teilweise eingeschränkt, da Arcade keine perfekte Bodenrotation bei hügeligen Flächen unterstützt.
-* Es gibt keine Pausenfunktion.
 
 ---
 
