@@ -17,8 +17,7 @@ Ziel des Spiels ist es, Hindernisse zu überwinden, Münzen zu sammeln und das Z
 
 ## 🎮 Steuerung
 
-* **Pfeiltasten links/rechts:** Bewegung
-* **Pfeiltasten oben/unten:** Salto
+* **Pfeiltasten links/rechts:** Drehung
 * **Leertaste:** Springen
 * **R:** Level neu starten
 * **N:** Zum nächsten Level wechseln
