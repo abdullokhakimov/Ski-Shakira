@@ -44,7 +44,7 @@ Alle Kommunikationen miteinander haben auf WhatsApp stattgefunden. Eine Gruppe w
 
 Als eine 5er Gruppe gab es viele organisatorischen Herausforderung, die mit der Entscheidung des Spiels angefangen hatten. Verschiedene Meinungen
     wurden geaeussert, aber es war leicht mit solchen Problemen zu umgehen, weil unsere starke Freundschaft uns ermoeglicht hat, Kompromisse zu schliessen. Es war deswegen im Laeufe der Zeit
-    sehr einfacher gewesen, Entscheidungen zu treffen. 
+    sehr einfacher gewesen, Entscheidungen zu treffen. Unser Retter war paar Mal eine Muenze gewesen, die ich immer noch dabei habe, als wir zu keiner Zustimmung gekommen sind. 
 
 
 [Zurück zur Startseite](../README.md)
