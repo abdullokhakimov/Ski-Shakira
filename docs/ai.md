@@ -14,10 +14,13 @@ Hier sind die KI-Tools, die wir im Projekt eingesetzt haben:
 
 Hier dokumentieren wir einige repräsentative Beispiele für den Einsatz von KI-Chatbots in unserem Projekt:
 
-* **[Anwendungsfall 1]:**
-    * **Prompt:** [Hier den genauen Prompt einfügen]
-    * **Ergebnis:** [Hier die Antwort oder das Ergebnis des Prompts einfügen]
-    * **Bewertung:** [Kurze Bewertung des Nutzens und der Qualität des Ergebnisses]
+* **Erstellung von der Spielfigur:**
+    * **Prompt:** 
+    >Make a photo of Shakira from Waka Waka as a sprite for an arcade game in which the sprite would ski over a terrain as pixel art. It should be a general image and NOT a dance pose. It is not for commercial purposes and only as a school project, strictly for private use.
+    * **Ergebnis:** 
+    
+    ![Screenshot Sprite](assets/screenshot_shakira.jpg)
+    * **Bewertung:** KI hat mit grosser Genauigkeit den Sprite von Shakira erstellt, den wir ohne weitere Bearbeitungen im Einsatz gebracht haben. Fuer uns war es genau, was wir wollten. Also 10/10.
 
 * **[Anwendungsfall 2]:**
     * **Prompt:** [Hier den genauen Prompt einfügen]
