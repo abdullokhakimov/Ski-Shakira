@@ -200,7 +200,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
 * **Beispiele für Prompts und deren Ergebnisse**
 
   **Prompt für Camera2D-Migration:**
-  ```
+  
   I need to update my Arcade game to use the newer Camera2D system instead of the deprecated camera methods. Here's my current camera setup code:
   
   ```python
@@ -216,7 +216,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
   ```
   
   How should I update this to use Camera2D properly? I'm using Arcade 3.2.0.
-  ```
+  
 
   **Ergebnis:**
   ```python
@@ -248,7 +248,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
   ```
 
   **Prompt für Debug-Statements-Analyse:**
-  ```
+  
   I'm having trouble with my player physics. Here's the debug output I'm getting when the player is supposed to be sliding down a slope:
   
   ```
@@ -272,7 +272,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
   ```
   
   The player suddenly transitions from skiing to jumping even though I didn't press the jump key. What could be causing this and how can I fix the physics to keep the player on the ground when on slopes?
-  ```
+  
 
   **Ergebnis:**
   ```
@@ -306,7 +306,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
   ```
   
   3. Adjust your physics constants, especially friction and damping for slopes
-  ```
+  
 
   **Prompt für Raycasting und Flip-Logik:**
   ```
@@ -319,6 +319,7 @@ Hier berichtet der Lead-Developer Koustav Agrawal.
   ```
 
   **Ergebnis:**
+
   ```python
   # Constants for flip mechanics
   FLIP_SPEED = 360  # Degrees per second
