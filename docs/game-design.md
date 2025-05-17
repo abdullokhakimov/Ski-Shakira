@@ -18,7 +18,7 @@ in dem Spiel.
 
 ![Screenshot Shakira](assets/screenshot_shakira.jpg)
 
-![Shakira Tanz](assets/shakira_tanz.GIF)
+![Shakira Tanz](assets/shakira_tanz.mp4)
 
 ## Spielziel und Progression
 
