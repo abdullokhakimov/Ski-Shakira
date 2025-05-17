@@ -1,4 +1,4 @@
-﻿# **Git Dokumentation**
+# **Git Dokumentation**
 
 Hier schreibt der Git-Meister Abdulloh Khakimov.
 
@@ -30,6 +30,9 @@ Ein Großteil der Entwicklung fand **gemeinsam vor Ort in der Bibliothek** statt
 
 ## **Statistiken**
 Insgesamt wurden **71 Commits** während des Projekts durchgeführt. Die Beiträge der einzelnen Teammitglieder verteilten sich wie folgt:
+
+[Contribution Analytics](https://git.tu-berlin.de/mittagspuase/platformer/-/graphs/main?ref_type=heads)
+
 
 |**Name**| **GitLab-Handle** | **Commits** |**Verantwortungsbereich**|
 |--|--|-------------|--|
