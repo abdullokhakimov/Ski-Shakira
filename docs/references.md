@@ -19,12 +19,12 @@ In dieser Tabelle dokumentieren wir, welche Bestandteile des Projekts selbst ers
 ## Detaillierte Quellenangaben
 
 - **Sound**: 
-pixabay.com
-khinsider.com
-youtube.com
+* [Pixabay](https://pixabay.com)
+* [Khinsider](https://khinsider.com)
+* [Google User Content (YouTube)](youtube.com)
 
 - **Programmierung**:
-api.arcade.academy
-pymunk.org
+* [Arcade API Documentation](https://api.arcade.academy)
+* [Pymunk Documentation](https://pymunk.org)
 
 
