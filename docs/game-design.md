@@ -16,9 +16,9 @@ Die Spielfigur ist Shakira. Sie ist zu den Bergen gegangen, um zu erholen und um
 muss man die Leertaste fuer einen Sprung oder die Rechtspfeiltaste fuer eine Drehung druecken. Es gibt keine Non-Player-Characters
 in dem Spiel.
 
-![Screenshot Shakira](assets/screenshot_shakira.png)
+![Screenshot Shakira](assets/screenshot_shakira.jpg)
 
-![Shakira Tanz](assets/shakira_tanz.mp4)
+![Shakira Tanz](assets/shakira_tanz.GIF)
 
 ## Spielziel und Progression
 
