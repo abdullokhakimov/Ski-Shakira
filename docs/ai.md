@@ -22,12 +22,9 @@ Hier dokumentieren wir einige repräsentative Beispiele für den Einsatz von KI-
     ![Screenshot Sprite](assets/screenshot_shakira.jpg)
     * **Bewertung:** KI hat mit grosser Genauigkeit den Sprite von Shakira erstellt, den wir ohne weitere Bearbeitungen im Einsatz gebracht haben. Fuer uns war es genau, was wir wollten. Also 10/10.
 
-* **[Anwendungsfall 2]:**
-    * **Prompt:** [Hier den genauen Prompt einfügen]
-    * **Ergebnis:** [Hier die Antwort oder das Ergebnis des Prompts einfügen]
-    * **Bewertung:** [Kurze Bewertung des Nutzens und der Qualität des Ergebnisses]
 
-* [...]
+
+    **Weitere Beispiele befinden sich [hier](docs/implementation.md).**
 ## Kritische Bewertung des KI-Einsatzes
 
 | Vorteile                                                    | Nachteile/Einschränkungen                                                                                                                                                                                             |
