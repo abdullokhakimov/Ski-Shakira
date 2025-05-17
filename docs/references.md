@@ -8,11 +8,11 @@ In dieser Tabelle dokumentieren wir, welche Bestandteile des Projekts selbst ers
 | --------------------- | --------------- | -------- | --------- | --------------- |
 | Spielidee             |     v           |          |           |   nein          |
 | Konzept               |     v           |          |           |   nein          |
-| Programmcode          |     t           |Claude, Grok|Pycharm  |   nein          |
-| Karten                |     v           |          |           |   nein          |
+| Programmcode          |     t           |Claude, Grok|Pycharm  |   ja          |
+| Karten                |     v           |          | Tiled          |   nein          |
 | Grafiken Spielfigur   |     n           |ChatGPT   |           |   nein          |
 | Grafiken Hintergrund  |     v           |          |           |   nein          |
-| Tilesets              |     t           |          |           |   nein          |
+| Tilesets              |     t           |          |   piskel        |   nein          |
 | Sound                 |     n           |          |           |   ja            |
 | Dokumentation         |     v           |          |           |   nein          |
 
@@ -22,4 +22,9 @@ In dieser Tabelle dokumentieren wir, welche Bestandteile des Projekts selbst ers
 pixabay.com
 khinsider.com
 youtube.com
+
+- **Programmierung**:
+api.arcade.academy
+pymunk.org
+
 
