@@ -79,7 +79,7 @@ python Ski_Shakira_main.py
 
 ## 👥 Team
 
-* **Abdulloh Khakimov (@akhakiym)** – Git, level design
+* **Abdulloh Khakimov (@abdullokhakimov)** – Git, level design
 * **Elizaveta Chichkanov (@chiliza)** – Game design
 * **Koustav Agrawal (@koustavagr2005)** – Main programming
 * **Aanjneya Moudgil (@aanjneya)** – Testing and error management
