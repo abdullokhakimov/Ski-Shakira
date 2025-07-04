@@ -1,33 +1,32 @@
 ## Game Design
 
-Hier berichtet die Game Designerin Elizaveta Chichkanov
+Here, game designer Elizaveta Chichkanov reports
 
-## Spielkonzept
+## Game Concept
 
-Das grundlegende Konzept unseres Spiels ist das Ueberleben an dem Weg mit Hindernissen. Im Spiel wurden solche Mechaniken 
-wie Springen, Drehungen und dynamische Licht implementiert. Im ursprunglichen Prototyp war die Karte und das Programm schlecht 
-zusammen verknuepft, darueber hinaus gab es Probleme mit der Einstellungen von Physik-Engine.
+The basic concept of our game is survival on a path filled with obstacles. Mechanics such as jumping, turning, and dynamic lighting have been implemented in the game.  In the original prototype, the map and the program were poorly 
+linked, and there were also problems with the physics engine settings.
 
-![Screenshot Karte](assets/screenshot.png)
+![Screenshot Map](assets/screenshot.png)
 
-## Story und Charaktere
+## Story and Characters
 
-Die Spielfigur ist Shakira. Sie ist zu den Bergen gegangen, um zu erholen und um Ski zu fahren. Um Protagonist zu steuern,
-muss man die Leertaste fuer einen Sprung oder die Rechtspfeiltaste fuer eine Drehung druecken. Es gibt keine Non-Player-Characters
-in dem Spiel.
+The main character is Shakira. She has gone to the mountains to relax and ski. To control the protagonist,
+you have to press the space bar to jump or the right arrow key to turn. There are no non-player characters
+in the game.
 
 ![Screenshot Shakira](assets/screenshot_shakira.jpg)
 
-![Shakira Tanz](assets/shakira_tanz.mp4)
+![Shakira Dance](assets/shakira_tanz.mp4)
 
-## Spielziel und Progression
+## Game objective and progression
 
-Das Ziel des Spiels ist das Zuruecklegen einer bestimmten, mit Hindernissen gestatteten Strecke. Der Spieler muss
-Sammelobjekte (Muenzen) sammeln oder die Tricks (vollstaendige Drehungen) machen, um Score zu erhoehen. Im 1.Level
-gibt es wenige Hindernisse, im Zweiten steigt die Anzahl davon. Ausserdem ist die Sichtbarkeit wegen der Dunkelheit begrenzt,
-was auch die Schwierigkeit erhoeht.
+The objective of the game is to cover a certain distance with obstacles. The player must
+collect collectibles (coins) or perform tricks (complete spins) to increase their score. In the first level
+there are few obstacles, but in the second level the number of obstacles increases. In addition, visibility is limited due to darkness,
+which also increases the difficulty.
 
-## Assets und Ressourcen
+## Assets and resources
 
-Die Grafik enthaelt die sebstgemachte Karten und Hindernisse und auch durch KI erstellte Spielfigur-Shakira. Die Musik stammt
-aus den verschiedenen Webseiten: pixabay.com, khinsider.com und youtube.com
+The graphics include homemade maps and obstacles, as well as the AI-generated character Shakira. The music comes
+from various websites: pixabay.com, khinsider.com, and youtube.com.
