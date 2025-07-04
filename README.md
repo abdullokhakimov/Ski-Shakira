@@ -1,26 +1,26 @@
 # 🎿 Ski Shakira
 
-Willkommen bei **Ski Shakira** – einem aufregenden 2D-Platformer-Spiel, das als Teamprojekt im Studienkolleg entwickelt wurde. In diesem Spiel steuerst du eine Skifahrerin durch verschneite Levels voller Herausforderungen, Licht- und Schatteneffekte und sammelst dabei möglichst viele Punkte durch akrobatische Stunts.
+Welcome to **Ski Shakira** - an exciting 2D platformer game developed as a team project at the Studienkolleg. In this game you control a skier through snowy levels full of challenges, light and shadow effects and collect as many points as possible through acrobatic stunts.
 
 ---
 
-## 🕹️ Spielbeschreibung
+## 🕹️ Game description
 
-**Ski Shakira** ist ein Level-basiertes Platformer-Game mit zwei unterschiedlichen Karten:
+**Ski Shakira** is a level-based platformer game with two different maps:
 
-* **Level 1:** Einführung in Steuerung und Gameplay. Leichte Hindernisse und gute Sichtbarkeit.
-* **Level 2:** Dunkleres Level mit eingeschränkter Sicht und anspruchsvolleren Hindernissen.
+* **Level 1:** Introduction to controls and gameplay. Easy obstacles and good visibility.
+** **Level 2:** Darker level with limited visibility and more challenging obstacles.
 
-Ziel des Spiels ist es, Hindernisse zu überwinden, Münzen zu sammeln und das Ziel möglichst schnell und unbeschadet zu erreichen.
+The aim of the game is to overcome obstacles, collect coins and reach the goal as quickly as possible without being damaged.
 
 ---
 
-## 🎮 Steuerung
+## 🎮 Controls
 
-* **Pfeiltasten links/rechts:** Drehung
-* **Leertaste:** Springen
-* **R:** Level neu starten
-* **N:** Zum nächsten Level wechseln
+* **Left/right arrow keys:** Rotate
+* **Space bar:** Jump
+* **R:** Restart level
+* **N:** Go to next level
 
 
 ---
@@ -33,36 +33,36 @@ Ziel des Spiels ist es, Hindernisse zu überwinden, Münzen zu sammeln und das Z
 
 ## 🛠️ Installation
 
-### Voraussetzungen
+### Requirements
 
 * Python **3.10+**
 * Arcade **3.1+**
 * Pymunk
 
-### Schritte
+### Steps
 
-1. Repository herunterladen:
+1. Download repository:
 
 ```bash
 git clone https://git.tu-berlin.de/mittagspuase/platformer.git
 cd platformer
 ```
 
-2. Virtuelle Umgebung einrichten (optional aber empfohlen):
+2. Set up virtual environment (optional but recommended):
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # für macOS/Linux
-venv\Scripts\activate  # für Windows
+source venv/bin/activate  # for macOS/Linux
+venv\Scripts\activate  # for Windows
 ```
 
-3. Abhängigkeiten installieren:
+3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Spiel starten:
+4. Start the game:
 
 ```bash
 python Ski_Shakira_main.py
@@ -70,31 +70,30 @@ python Ski_Shakira_main.py
 
 ---
 
-## 📘 Projektübersicht
+## 📘 Project overview
 
-* Entwickelt im Rahmen des Softwareprojekts am Studienkolleg Berlin
-* Aufgabenstellung: Umsetzung eines Platformer Games mit Python und der Arcade-Bibliothek
+* Developed as part of the software project at Studienkolleg Berlin
+* Task: Implementation of a platformer game with Python and the Arcade library
 
 ---
 
 ## 👥 Team
 
-* **Abdulloh Khakimov (@akhakiym)** – Git, Level Design
-* **Elizaveta Chichkanov (@chiliza)** – Game Design
-* **Koustav Agrawal (@koustavagr2005)** – Hauptprogrammierung
-* **Aanjneya Moudgil (@aanjneya)** – Test und Fehlermanagement
-* **Juanita Giraldo Foronda (@juanisg)** – Grafikdesign
+* **Abdulloh Khakimov (@akhakiym)** – Git, level design
+* **Elizaveta Chichkanov (@chiliza)** – Game design
+* **Koustav Agrawal (@koustavagr2005)** – Main programming
+* **Aanjneya Moudgil (@aanjneya)** – Testing and error management
+* **Juanita Giraldo Foronda (@juanisg)** – Graphic Design
 
-> Obwohl jede\:r eine bestimmte Rolle hatte, unterstützte das Team sich gegenseitig bei der Entwicklung aller Bestandteile.
+> Although everyone had a specific role, the team supported each other in the development of all components.
 
 
-## 📄 Weitere Informationen zum Projekt
-- Unser [Game Design](docs/game-design.md) mit Story, Konzept, Mechaniken, Spielfigur.
-- [Level Design](docs/level-design.md): Tilesets, Karten, Gestaltung
-- [Programmierung](docs/implementation.md): Alles zum Python Sourcecode
-- Und [so verwenden wir git](docs/git.md)!
-- [Dokumentation des Projektmanagements](docs/project-management.md).
-- [Test und Fehlerbehebung](docs/test.md)
-- Übersicht über die verwendeten [KI-Tools](docs/ai.md)
-- Tabellarische Übersicht über [externe Quellen](docs/references.md)
-
+## 📄 Further information about the project
+- Our [Game Design](docs/game-design.md) with story, concept, mechanics, game character.
+- [Level Design](docs/level-design.md): Tilesets, maps, design
+- [Programming](docs/implementation.md): Everything about the Python source code
+- And [how we use git](docs/git.md)!
+- [Project management documentation](docs/project-management.md).
+- [Testing and debugging](docs/test.md)
+- Overview of the [AI tools](docs/ai.md) used
+- Tabular overview of [external sources](docs/references.md)
