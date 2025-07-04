@@ -29,8 +29,8 @@ There were a total of **71 commits**, which corresponds to an average of **1.2 c
 
 Most of the development took place **together on site in the library**. The distribution of tasks was clearly structured so that everyone was responsible for a specific component of the game. In the event of overlaps or joint work on certain modules, the **final merge result was decided by the person responsible for the relevant part**. Other team members could provide feedback or suggestions for improvement.
 
-|**Name**| **GitLab handle** | **Commits** |**Area of responsibility**|
-|--|--|-------------|--|
+|**Name**| **GitLab handle** |**Area of responsibility**|
+|--|--|--|
 | Abdulloh Khakimov | @abdullokhakimov | Git master; level designer |
 | Elizaveta Chichkanov | @chiliza | Game Designer |
 | Koustav Agrawal | @koustavagr2005 | Lead Developer |
