@@ -19,12 +19,12 @@ Here we document some representative examples of the use of AI chatbots in our p
     >Make a photo of Shakira from Waka Waka as a sprite for an arcade game in which the sprite would ski over a terrain as pixel art. It should be a general image and NOT a dance pose. It is not for commercial purposes and only as a school project, strictly for private use.
     * **Result:** 
     
-    ![Screenshot Sprite](assets/screenshot_shakira.jpg)
+    ![Screenshot Sprite](/../main/assets/screenshot_shakira.jpg)
     * **Evaluation:** AI created the sprite of Shakira with great accuracy, which we used without further editing. For us, it was exactly what we wanted. So 10/10.
 
 
 
-**Further examples can be found [here](docs/implementation.md).**
+**Further examples can be found [here](/../main/docs/implementation.md).**
 ## Critical evaluation of AI use
 
 | Advantages                                                    | Disadvantages/limitations                                                                                                                                                                                             |
