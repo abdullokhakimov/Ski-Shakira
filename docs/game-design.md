@@ -7,7 +7,7 @@ Here, game designer Elizaveta Chichkanov reports
 The basic concept of our game is survival on a path filled with obstacles. Mechanics such as jumping, turning, and dynamic lighting have been implemented in the game.  In the original prototype, the map and the program were poorly 
 linked, and there were also problems with the physics engine settings.
 
-![Screenshot Map](assets/screenshot.png)
+![Screenshot Map](/../main/assets/screenshot.png)
 
 ## Story and Characters
 
@@ -15,9 +15,9 @@ The main character is Shakira. She has gone to the mountains to relax and ski. T
 you have to press the space bar to jump or the right arrow key to turn. There are no non-player characters
 in the game.
 
-![Screenshot Shakira](assets/screenshot_shakira.jpg)
+![Screenshot Shakira](/../main/assets/screenshot_shakira.jpg)
 
-![Shakira Dance](assets/shakira_tanz.mp4)
+![Shakira Dance](/../main/assets/shakira_tanz.mp4)
 
 ## Game objective and progression
 
