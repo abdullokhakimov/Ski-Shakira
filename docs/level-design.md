@@ -1,109 +1,106 @@
+# Level Design Documentation
 
-# Level Design Dokumentation
-
-Level Design hat gemacht: Abdulloh Khakimov
-
----
-
-## Levelkonzept
-
-Unser Spiel besteht aus **zwei Leveln**:
-
-- **Level 1** ist ein Einführungslevel, in dem der Spieler die Steuerung und Spielmechaniken lernt. Die Karte ist relativ einfach, mit ein paar Hindernissen und gut sichtbaren Elementen.
-- **Level 2** ist deutlich schwieriger: Die Karte ist größer, beinhaltet mehr Hindernisse und ist durch Dunkelheit visuell eingeschränkt – die Sicht ist nur durch einen Lichtkegel möglich.
-
-Der Übergang erfolgt durch Tastendruck:
-- Nach Abschluss von Level 1: Taste **N** → Start von Level 2.
-- Nach Abschluss von Level 2 endet das Spiel mit einer Siegesanimation und Anzeige des Punktestands.
-
-Die beiden Level unterscheiden sich nicht nur im **Namen**, sondern auch in ihrer **Kartenstruktur** und den verwendeten **Tilesets**.
+Level Design by: Abdulloh Khakimov
 
 ---
 
-## Spielmechaniken im Level Design
+## Level Concept
 
-Unsere Level-Mechaniken basieren auf realistischen physikalischen Prinzipien:
+Our game consists of **two levels**:
 
-- Der Spieler erkennt klar den Unterschied zwischen Schnee, Münzen, Steinen und Wasser.
-- Die Spielfigur bewegt sich auf **welligem Untergrund**, passt sich dabei dem **Neigungswinkel** an und rotiert entsprechend.
-- Die Sprungmechanik sorgt für **weiches Springen und realistisches Landen**.
-- Kollisionen mit Hindernissen (z. B. Stein oder Wasser) führen zum Spielende.
-- Münzen können durch Berührung eingesammelt werden.
-- Der Spieler kann **Kunststücke (Saltos)** mit den Pfeiltasten ausführen – bei riskanter Landung (mit dem Kopf zuerst) endet das Spiel ebenfalls.
+- **Level 1** is an introductory level where the player learns the controls and game mechanics. The map is relatively simple, with a few obstacles and clearly visible elements.
+- **Level 2** is significantly more difficult: The map is larger, contains more obstacles, and is visually limited by darkness – visibility is only possible through a cone of light.
 
-Die Physikmechanik wurde mithilfe der **Pymunk-Bibliothek** implementiert und ist in beiden Leveln identisch aktiv.
+The transition is achieved by pressing a key:
+- After completing Level 1: Press **N** → Start Level 2.
+- After completing Level 2, the game ends with a victory animation and a score display.
+
+The two levels differ not only in their **names**, but also in their **map structure** and the **tilesets** used.
 
 ---
 
-## Karten und Tilesets
+## Game Mechanics in Level Design
 
-Zur Erstellung der Karten und Tilesets nutzten wir:
+Our level mechanics are based on realistic physics principles:
 
-- **Piskel** für eigene Tilesets (z. B. Schnee und Stein)
-- **Tiled Map Editor** zur visuellen Kartenerstellung
-- Exportformate: `.tmj` (Tiled JSON) und `.tmx` (Tilemap XML für Tileset-Sammlungen)
+- The player clearly recognizes the difference between snow, coins, stones, and water.
+- The character moves on **undulating ground**, adapting to the **angle of inclination** and rotating accordingly.
+- The jumping mechanics ensure **smooth jumping and realistic landings**.
+- Collisions with obstacles (e.g., stones or water) result in the game ending.
+- Coins can be collected by touching them.
+- The player can perform **tricks (somersaults)** using the arrow keys – a risky landing (headfirst) also ends the game.
 
-Für die beiden Level verwendeten wir unterschiedliche Ressourcen:
+The physics mechanics were implemented using the **Pymunk library** and are active in both levels.
 
-- **Level 1:** Default-Tilesets aus der Arcade-Bibliothek
-- **Level 2:** Eigene Tilesets, erstellt mit Piskel
+---
 
-Beispiele von Tileset:
+## Maps and Tilesets
 
-**Schnee:**  
+To create the maps and tilesets, we used:
+
+- **Piskel** for custom tilesets (e.g., snow and rock)
+- **Tiled Map Editor** for visual map creation
+- Export formats: `.tmj` (Tiled JSON) and `.tmx` (Tilemap XML for tileset collections)
+
+We used different resources for the two levels:
+
+- **Level 1:** Default tilesets from the Arcade library
+- **Level 2:** Custom tilesets created with Piskel
+
+Tileset examples:
+
+**Snow:**
 <img src="../assets/Tiles/snow.png" width="64">
 
-**Stein:**  
+**Rock:**
 <img src="../assets/Tiles/rock.png" width="64">
 
-Die Größe der einzelnen Tiles beträgt **128x128 Pixel**.
+The size of each tile is **128x128 pixels**.
 
 ---
 
-## Technische Realisierung
+## Technical Implementation
 
-Die Karten wurden in Arcade wie folgt eingebunden:
+The maps were integrated into Arcade as follows:
 
 ```python
 map_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"map/Level{level_number}.tmj")
 self.tile_map = arcade.load_tilemap(
-    map_path, layer_options=layer_options, scaling=TILE_SCALING
+map_path, layer_options=layer_options, scaling=TILE_SCALING
 )
 ```
 
-### Layerstruktur:
+### Layer structure:
 
-- **Terrain**: Boden (z. B. Schnee)
-- **Obstacles**: Hindernisse (z. B. Stein, Wasser)
-- **Collectibles**: Münzen
+- **Terrain**: Ground (e.g., snow)
+- **Obstacles**: Obstacles (e.g., rock, water)
+- **Collectibles**: Coins
 
-### Herausforderung:
+### Challenge:
 
-Das einzige Problem war die **Pfadangabe**, da Teammitglieder mit verschiedenen Betriebssystemen arbeiteten. Dies wurde durch den Einsatz der **`os`-Bibliothek** gelöst.
+The only problem was the **path specification**, as team members were working with different operating systems. This was solved by using the **`os` library**.
 
 ---
 
 ## Balancing
 
-### Schwierigkeitsgrad
+### Difficulty Level
 
-Der Schwierigkeitsgrad hängt ab von:
+The difficulty level depends on:
 
-- Kartengröße
-- Anzahl und Platzierung der Hindernisse
-- Sichtverhältnissen (Level 2 ist dunkel)
+- Map size
+- Number and placement of obstacles
+- Visibility (Level 2 is dark)
 
-### Testmethoden
+### Testing Methods
 
-Nach jedem Leveldesign wurde die Karte ins Repository hochgeladen und von jedem Teammitglied getestet. Basierend auf Feedback wurden Karten verbessert und optimiert.
+After each level design, the map was uploaded to the repository and tested by each team member. Based on feedback, maps were improved and optimized.
 
-### Anpassungen
+### Adjustments
 
-Jeder Testdurchlauf führte zu sinnvollen Verbesserungen in Bezug auf Layout, Hindernisplatzierung und Spielbarkeit.
+Each test run resulted in meaningful improvements in layout, obstacle placement, and playability.
 
+### Rating
 
-### Bewertung
-
-- **Level 1** ist am besten balanciert – mit ebenem Terrain und klarer Struktur.
-- **Level 2** enthält unebenes Terrain, das ursprünglich komplexer gestaltet werden sollte, aber durch Einschränkungen der Arcade-Bibliothek begrenzt war.
-
+- **Level 1** is the best balanced – with flat terrain and a clear structure.
+- **Level 2** contains uneven terrain that was originally intended to be more complex but was limited by the arcade library's limitations.
