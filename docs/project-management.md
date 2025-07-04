@@ -1,50 +1,33 @@
-# Projektmanagement Dokumentation
+# Project Management Documentation
 
-Hier schreibt Aanjneya
+## Team Structure
+We decided to organize ourselves into a group of five because we knew each other and already had experience working together. One of the first decisions we made was how to divide the workload between us. This was difficult because there were a few roles that almost everyone wanted to take on. In the end, we agreed and the roles were distributed as follows:
 
-## Teamstruktur
-Wir hatten uns entschieden, uns in einer 5er Gruppe zu organisieren, denn wir kannten einander und hatten schon Erfahrung mit Zusammenarbeit. Eine der ersten getroffenen Entscheidungen war die Arbeitsteilung zwischen uns. Es gab Schwierigkeiten damit, weil es paar Rolle gab, die fast alle uebernehmen wollten. Am Ende haben wir uns geeinigt und die Rollen waren so verteilt: 
+|Person |Role |
+|--- |--- |
+|Abdulloh |Git Master; Level Designer |
+|Koustav |Lead Developer |
+|Liza |Game Designer |
+|Juanita |Graphic Designer |
+|Aanjneya |Test and Defect Management |
 
-|Person       |Rolle                      |
-|---          |---                        |
-|Abdulloh     |Git-Meister; Level Designer|
-|Koustav      |Lead Developer             |
-|Liza         |Game Designerin            |
-|Juanita      |Grafik Designerin          |
-|Aanjneya     |Test und Fehlermanagement  |
+Abdulloh already has experience with Git and was therefore the qualified candidate for the role. He also has an interest in level design. As the lead developer, Koustav was the main programmer we could trust. With her bright ideas and creative mindset, Liza was the perfect solution for us. Juanita is known for her artistry, and we couldn't have found a better person. If you're looking for critical thinking and problem-solving, you have to find Aanjneya. That's what we did; he was the go-to person when a problem arose. There was no fixed role, but everyone worked together and truly acted as a team, which we're proud of.
 
-Abdulloh hat schon Erfahrung mit Git und war deshalb der qualifzierte Kandidat dafuer. Ferner hat er auch Interesse an Level 
-    Designing. Koustav war als Lead Developer der Hauptprogrammer, dem wir vertrauen konnten. Mit ihren klugen Ideen und ihrer 
-    kreativen Denkweise war Liza die perfekte Loesung fuer uns. Juanita ist bekannt fuer ihr Kuenstlertum, und wir haetten keine 
-    bessere Person finden koennen. Wenn nach kritischem Denken und Problemloesung gesucht wird, muss man Aanjneya finden. Das 
-    haben wir gemacht, er war der go-to Person beim Auftreten eines Problems. 
-    Es gab keine feste Rolle aber, alle haben miteinander gearbeitet und wirklich als ein Team gehandelt, worauf wir stolz sind.
+## Schedule and Milestones
 
+At the beginning, there were not only plans, but also enthusiasm for the project. Therefore, we planned a lot. We were supposed to have three to four levels and an AI NPC as the final boss. By the first milestone, we already knew what we were going to do. But we hadn't started programming the game yet. By the second milestone, we already had a prototype, and only then did we understand what was possible and what wasn't. Having an NPC as the final boss was no longer realistic, and we moved on to the Dark Night as a final challenge.
 
+## Communication
 
+All communication with each other took place via WhatsApp. A group was created to work as a team.
+Issues were also shared via GitLab. We wrote to-dos on WhatsApp and assigned one person responsibility for each item.
+Meetings were held every day in the cafeteria, as we always sit together. But special meetings also took place almost every week, staying at the TU after Stk.
+A variety of devices were available. From MacBooks to Windows laptops to iPads, everything was used and needed.
 
-## Zeitplan und Meilensteine
+## Challenges
 
-Am Anfang gab es nicht nur Plaene, sonder auch Begeisterung fuer das Projekt. Deshalb haben wir Vieles geplant. Wir sollten 
-    3 bis 4 Levels und einen KI-NPC als Endgegner haben. Am 1. Meilenstein wussten wir schon, was wir machen werden. Aber wir hatten
-    noch nicht mit der Programmierung des Spiels angefangen. Bis 2. Meilenstein hatten wir schon einen Prototyp und erst dann hatten
-    wir verstanden, was moeglich war und was nicht. Ein NPC als Endgegner zu haben war nicht mehr realistisch und wir waren mit der 
-    dunklen Nacht als eine Endherausforderung weitergegangen.
+As a group of five, there were many organizational challenges, which began with the decision to play the game. Different opinions
+were expressed, but it was easy to deal with such problems because our strong friendship enabled us to compromise. It was therefore much easier over time
+to make decisions. Our savior was a coin, which I still carry with me, a few times when we couldn't reach an agreement.
 
-
-## Kommunikation
-
-Alle Kommunikationen miteinander haben auf WhatsApp stattgefunden. Eine Gruppe wurde erstellt, um als ein Team arbeiten zu koennen.
-    Issues waren auch durch GitLab geteilt. Auf WhatsApp haben wir To-Dos geschrieben, und eine Person fuer jeden Punkt verantwortlich gemacht.
-    Meetings gab es jeden Tag in der Mensa, da wir immer zusammen miteinander sitzen. Aber spezielle Meetings waren auch fast jede Woche zu sehen, indem wir nach Stk in der TU geblieben sind.
-    Eine Vielfalt von Geraeten standen zur Verfuegung. Von Macbook bis Windows-Laptop bis iPads, alles war eingesetzt und gebraucht. 
-
-
-## Herausforderungen
-
-Als eine 5er Gruppe gab es viele organisatorischen Herausforderung, die mit der Entscheidung des Spiels angefangen hatten. Verschiedene Meinungen
-    wurden geaeussert, aber es war leicht mit solchen Problemen zu umgehen, weil unsere starke Freundschaft uns ermoeglicht hat, Kompromisse zu schliessen. Es war deswegen im Laeufe der Zeit
-    sehr einfacher gewesen, Entscheidungen zu treffen. Unser Retter war paar Mal eine Muenze gewesen, die ich immer noch dabei habe, als wir zu keiner Zustimmung gekommen sind. 
-
-
-[Zurück zur Startseite](../README.md)
+[Back to homepage](../README.md)
